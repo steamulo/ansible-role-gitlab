@@ -70,5 +70,37 @@ nginx['ssl_verify_client'] = "{{ gitlab_nginx_ssl_verify_client }}"
 nginx['ssl_client_certificate'] = "{{ gitlab_nginx_ssl_client_certificate }}"
 {% endif %}
 
+# Docker registry configuration
+# gitlab_rails['registry_external_url'] = "{{ registry_external_url + ':' + registry_external_port }}"
+
+gitlab_rails['registry_enabled'] = "{{ registry_enabled }}"
+gitlab_rails['registry_host'] = "{{ registry_external_url }}"
+gitlab_rails['registry_port'] = "{{ registry_external_port }}"
+registry_nginx['ssl_certificate'] = "{{ gitlab_ssl_certificate }}"
+registry_nginx['ssl_certificate_key'] = "{{ gitlab_ssl_certificate_key }}"
+
+# Backup upload connection
+
+{% if backup_upload_connection_conf %}
+gitlab_rails['backup_upload_connection'] = {
+    {% for key, value in backup_upload_connection_conf.iteritems() %}
+       '{{ key }}' => '{{ value }}',
+    {% endfor %}
+}
+{% endif %}
+
+{% if omniauth_providers_conf %}
+gitlab_rails['omniauth_providers'] = [
+  {
+    "name" => "{{ omniauth_providers_conf.name }}",
+    "app_id" => "{{ omniauth_providers_conf.app_id }}",
+    "app_secret" => "{{ omniauth_providers_conf.app_secret }}",
+    "args" => { "access_type" => "{{ omniauth_providers_conf.args.access_type }}", "approval_prompt" => "{{ omniauth_providers_conf.args.approval_prompt }}" }
+  }
+]
+{% endif %}
+
+gitlab_rails['backup_upload_remote_directory'] = "{{ backup_upload_remote_directory }}"
+
 # To change other settings, see:
 # https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md#changing-gitlab-yml-settings
