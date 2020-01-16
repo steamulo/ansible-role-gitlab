@@ -100,7 +100,9 @@ gitlab_rails['omniauth_providers'] = [
 ]
 {% endif %}
 
+{% if backup_upload_remote_directory is defined %}
 gitlab_rails['backup_upload_remote_directory'] = "{{ backup_upload_remote_directory }}"
+{% endif %}
 
 # To change other settings, see:
 # https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md#changing-gitlab-yml-settings
