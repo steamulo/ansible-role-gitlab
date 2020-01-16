@@ -81,7 +81,7 @@ registry_nginx['ssl_certificate_key'] = "{{ gitlab_ssl_certificate_key }}"
 
 # Backup upload connection
 
-{% if backup_upload_connection_conf %}
+{% if backup_upload_connection_conf is defined %}
 gitlab_rails['backup_upload_connection'] = {
     {% for key, value in backup_upload_connection_conf.iteritems() %}
        '{{ key }}' => '{{ value }}',
@@ -89,7 +89,7 @@ gitlab_rails['backup_upload_connection'] = {
 }
 {% endif %}
 
-{% if omniauth_providers_conf %}
+{% if omniauth_providers_conf is defined %}
 gitlab_rails['omniauth_providers'] = [
   {
     "name" => "{{ omniauth_providers_conf.name }}",

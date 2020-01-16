@@ -63,21 +63,3 @@ gitlab_email_reply_to: "gitlab@example.com"
 registry_enabled: true
 registry_external_url: "https://gitlab/"
 registry_external_port: 4567
-
-# Backup upload connection
-
-backup_upload_connection_conf:
-  provider: YOUR_PROVIDER
-  region: YOUR_REGION
-  aws_access_key_id: YOUR_ACCESS_KEY_HERE
-  aws_secret_access_key: YOUR_SECRET_ACCESS_KEY_HERE
-
-omniauth_providers_conf:
-  name: "google_oauth2"
-  app_id: "YOUR_APP_ID"
-  app_secret: "YOUR_APP_SECRET"
-  args: 
-    access_type: "offline"
-    approval_prompt: ""
-
-backup_upload_remote_directory: REMOTE.PATH
