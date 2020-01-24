@@ -71,15 +71,16 @@ nginx['ssl_client_certificate'] = "{{ gitlab_nginx_ssl_client_certificate }}"
 {% endif %}
 
 # Docker registry configuration
+gitlab_rails['registry_enabled'] = {{ registry_enabled }}
+{% if registry_enabled == "true" %}
 registry_external_url "{{ registry_external_url + ':' + registry_external_port }}"
-gitlab_rails['registry_enabled'] = "{{ registry_enabled }}"
 gitlab_rails['registry_host'] = "{{ registry_external_url }}"
 gitlab_rails['registry_port'] = "{{ registry_external_port }}"
 registry_nginx['ssl_certificate'] = "{{ gitlab_ssl_certificate }}"
 registry_nginx['ssl_certificate_key'] = "{{ gitlab_ssl_certificate_key }}"
+{% endif %}
 
 # Backup upload connection
-
 {% if backup_upload_connection_conf is defined %}
 gitlab_rails['backup_upload_connection'] = {
     {% for key, value in backup_upload_connection_conf.iteritems() %}
