@@ -147,7 +147,7 @@ If you want to enable [2-way SSL Client Authentication](https://docs.gitlab.com/
 
 If you are willing to enable/disable the Gitlab docker registry (By default the registry is enabled)
 
-    gitlab_registry_enabled: true
+    gitlab_registry_enable: true
     gitlab_registry_external_url: "https://gitlab/"
     gitlab_registry_external_url: 4567
 
