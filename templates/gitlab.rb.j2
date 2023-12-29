@@ -115,7 +115,7 @@ registry_nginx['ssl_certificate_key'] = "{{ gitlab_registry_nginx_ssl_certificat
 # Backup upload connection
 {% if gitlab_backup_upload_connection_conf is defined %}
 gitlab_rails['backup_upload_connection'] = {
-    {% for key, value in gitlab_backup_upload_connection_conf.iteritems() %}
+    {% for key, value in gitlab_backup_upload_connection_conf.items() %}
        '{{ key }}' => '{{ value }}',
     {% endfor %}
 }
